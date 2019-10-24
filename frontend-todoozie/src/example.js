@@ -30,23 +30,30 @@ const statusOptions = [
   { key: 4, text: "", value: 4}
 ]
 
-const CardExampleFluid = () => (
+const CardExampleFluid = (props) => (
 
 
   <Card.Group itemsPerRow={4}>
-    <Card fluid color='green' header='Item' onClick={() => null}>
-    {/* <input></input> */}
+    <Card fluid color='green' onClick={() => null}>
+    <input onKeyDown={(event) => {
+      if(event.keyCode === 13)
+      props.handleChange(event.target.value)
+    }}></input>
+    <h3>{props.value}</h3>
     </Card>
     <Card fluid color='orange' header='Person' onClick={() => null}>
-      <Dropdown placeholder='Select Person' options={personOptions}></Dropdown>
+      <Dropdown placeholder='Select Person' options={personOptions} value={personOptions.value} onChange={(event) => props.handlePerson(event.target.innerText)}/>
+    <h3>{props.person}</h3>
     </Card>
 
     <Card fluid color='yellow' header='Status' onClick={() => null} style={{backgrouncolor: 'yellow'}}>
-      <Dropdown placeholder='Select Status' options={statusOptions}></Dropdown>
+      <Dropdown placeholder='Select Status' options={statusOptions} onChange={(event) => props.handleStatus(event.target.innerText)}></Dropdown>
+    <h3>{props.status}</h3>
     </Card>
 
     <Card fluid color='purple' onClick={() => null}>
-      <Calendar />
+      <Calendar onChange={(event) => props.handleCalendar(event)}/>
+    <h3>{props.date}</h3>
     </Card>
 
   </Card.Group>

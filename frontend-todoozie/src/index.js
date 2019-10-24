@@ -11,9 +11,46 @@ class AccountContainer extends Component {
 
         this.state = {
             transactions: [],
-            results: [],
+            results: '',
             value: '',
+            person: '',
+            status: '',
+            date: ''
         }
+    }
+
+    handleChange = (value) => {
+        this.setState({
+            value: value,
+        })
+    }
+
+    handlePerson = (value) => {
+        this.setState({
+            person: value,
+        })
+    }
+
+    handleStatus = (value) => {
+        this.setState({
+            status: value
+        })
+    }
+
+    handleCalendar = (event) => {
+        let date = JSON.stringify(event).split('T')[0].substring(1)
+        this.setState({
+            date: date
+        })
+    }
+
+    render() {
+        return(
+            <Container style={{ margin: 20 }}>
+                <Header as="h3">Group Title</Header>
+                <Example value={this.state.value} handleChange={this.handleChange} handlePerson={this.handlePerson} handleStatus={this.handleStatus} handleCalendar={this.handleCalendar} person={this.state.person} status={this.state.status} date={this.state.date} />
+            </Container>
+        )
     }
     
 
@@ -35,8 +72,9 @@ styleLink.href = "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css
 document.head.appendChild(styleLink);
 
 ReactDOM.render(
-  <App>
-    <Example />
-  </App>,
+    <AccountContainer />,
+//   <App>
+//     <Example />
+//   </App>,
   document.getElementById("root")
 );
